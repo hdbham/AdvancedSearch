@@ -52,7 +52,7 @@ const thesaurus = [{
 
 const getInputExclusions = (exclusions) => {
   exclusions.forEach((exclusion) => {
-    exclusionSynonyms(exclusion)
+    GetExclusionSynonyms(exclusion)
   });
 };
 

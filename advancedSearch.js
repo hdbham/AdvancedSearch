@@ -24,6 +24,21 @@ let data = [
     id: 5,
     name: "CowCornRice",
     ingredients: ["cow", "corn", "rice"]
+  },
+  {
+    id: 6,
+    name: "BeefMealCornRice",
+    ingredients: ["beef-meal", "corn", "rice"]
+  },
+  {
+    id: 7,
+    name: "BeefLiverCornRice",
+    ingredients: ["beef-liver", "corn", "rice"]
+  },
+  {
+    id: 8,
+    name: "ChickenMealCornRice",
+    ingredients: ["chicken-meal", "corn", "rice"]
   }
 ];
 
@@ -31,6 +46,7 @@ const exclusions = ["beef", "earthworms"];
 
 const thesaurus = [{
     "beef": ["cow", "beef-meal", "beef-liver"],
+    "chicken": ["chicken-meal", "chicken-liver"],
 }]
 
 const iterateExclusions = (exclusions) => {

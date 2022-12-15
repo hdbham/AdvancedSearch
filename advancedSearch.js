@@ -39,7 +39,6 @@ const iterateExclusions = (exclusions) => {
   });
 };
 
-//TODO expand exclusions to include synonyms 
 const exclusionSynonyms = (exclusion) => {
     thesaurus.forEach((item) => {
         if (item[exclusion]) {

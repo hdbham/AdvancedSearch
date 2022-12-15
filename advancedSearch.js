@@ -27,21 +27,28 @@ let data = [
   }
 ];
 
-const exclusions = ["beef", "corn"];
+const exclusions = ["beef", "earthworms"];
 
 const thesaurus = [{
-  //hashmap
+    "beef": ["cow", "beef-meal", "beef-liver"],
 }]
 
 const iterateExclusions = (exclusions) => {
   exclusions.forEach((exclusion) => {
-    getExcludedObjects(exclusion);
+    exclusionSynonyms(exclusion)
   });
 };
 
 //TODO expand exclusions to include synonyms 
-const exclusionSynonyms = () => {
-
+const exclusionSynonyms = (exclusion) => {
+    thesaurus.forEach((item) => {
+        if (item[exclusion]) {
+        item[exclusion].forEach((synonym) => {
+            getExcludedObjects(synonym);
+        });
+        }
+    });
+    getExcludedObjects(exclusion);
 }
 
 const getExcludedObjects = (exclusion) => {

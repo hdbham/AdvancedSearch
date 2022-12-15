@@ -1,4 +1,4 @@
-let data = [
+const data = [
   {
     id: 1,
     name: "VeggiesLambRice",
@@ -19,7 +19,6 @@ let data = [
     name: "BeefCornRice",
     ingredients: ["beef", "corn", "rice"]
   },
-
   {
     id: 5,
     name: "CowCornRice",
@@ -39,7 +38,13 @@ let data = [
     id: 8,
     name: "ChickenMealCornRice",
     ingredients: ["chicken-meal", "corn", "rice"]
-  }
+  },
+  {
+    id: 9,
+    name: "ChickenLiverCornRice",
+    ingredients: ["chicken-liver", "corn", "rice"]
+  },
+  
 ];
 
 const exclusions = ["beef", "chicken"];
@@ -76,7 +81,11 @@ const getExcludedObjects = (exclusion) => {
 };
 
 const removeExclusedObjects = (id) => {
-  data = data.filter((obj) => obj.id !== id);
+  data.forEach((obj) => {
+    if (obj.id !== id) {
+      data.splice(obj.id, 1);
+    }
+  } );
 };
 
 getInputExclusions(exclusions);

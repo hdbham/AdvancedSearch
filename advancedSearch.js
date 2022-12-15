@@ -79,6 +79,6 @@ const removeExclusedObjects = (id) => {
   data = data.filter((obj) => obj.id !== id);
 };
 
-iterateExclusions(exclusions);
+getInputExclusions(exclusions);
 
 console.log(data);

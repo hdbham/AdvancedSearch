@@ -42,20 +42,21 @@ let data = [
   }
 ];
 
-const exclusions = ["beef", "earthworms"];
+const exclusions = ["beef", "chicken"];
 
 const thesaurus = [{
     "beef": ["cow", "beef-meal", "beef-liver"],
     "chicken": ["chicken-meal", "chicken-liver"],
 }]
 
-const iterateExclusions = (exclusions) => {
+
+const getInputExclusions = (exclusions) => {
   exclusions.forEach((exclusion) => {
     exclusionSynonyms(exclusion)
   });
 };
 
-const exclusionSynonyms = (exclusion) => {
+const GetExclusionSynonyms = (exclusion) => {
     thesaurus.forEach((item) => {
         if (item[exclusion]) {
         item[exclusion].forEach((synonym) => {

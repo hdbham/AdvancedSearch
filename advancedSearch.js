@@ -44,7 +44,6 @@ const data = [
     name: "ChickenLiverCornRice",
     ingredients: ["chicken-liver", "corn", "rice"]
   },
-  
 ];
 
 const exclusions = ["beef", "chicken"];
@@ -73,7 +72,7 @@ const getExclusionSynonyms = (exclusion) => {
 }
 
 const getExcludedObjects = (exclusion) => {
-   data.forEach((item) => {
+  data.forEach((item) => {
     if (item.ingredients.includes(exclusion)) {
       removeExclusedObjects(item.id);
     }

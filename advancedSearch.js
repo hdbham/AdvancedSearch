@@ -1,8 +1,8 @@
-const data = [
+const products = [
   {
     id: 1,
-    name: "VeggiesLambRice",
-    ingredients: ["veggies", "lamb", "rice"]
+    name: "VeggiesLambEyes",
+    ingredients: ["veggies", "lamb", "eyes"]
   },
   {
     id: 2,
@@ -21,72 +21,63 @@ const data = [
   },
   {
     id: 5,
-    name: "CowCornRice",
-    ingredients: ["cow", "corn", "rice"]
+    name: "BeefLambRice",
+    ingredients: ["beef", "lamb", "rice"]
   },
   {
     id: 6,
-    name: "BeefMealCornRice",
-    ingredients: ["beef-meal", "corn", "rice"]
+    name: "Beef-meal,Rice",
+    ingredients: ["beef-meal", "rice"]
   },
   {
     id: 7,
-    name: "BeefLiverCornRice",
-    ingredients: ["beef-liver", "corn", "rice"]
+    name: "ChickenRice",
+    ingredients: ["chicken", "rice"]
   },
   {
     id: 8,
-    name: "ChickenMealCornRice",
-    ingredients: ["chicken-meal", "corn", "rice"]
-  },
-  {
-    id: 9,
-    name: "ChickenLiverCornRice",
-    ingredients: ["chicken-liver", "corn", "rice"]
+    name: "VeggiesLambRice",
+    ingredients: ["veggies", "lamb", "rice"]
   },
 ];
 
-const exclusions = ["beef", "chicken"];
+const desiredIngredients = ["lamb", "rice"];
 
-const thesaurus = [{
-    "beef": ["cow", "beef-meal", "beef-liver"],
-    "chicken": ["chicken-meal", "chicken-liver"],
+const excludedIngredients = ["beef", "chicken"];
+
+const synonymMap = [{
+  "beef": ["cow", "beef-meal", "beef-liver"],
+  "chicken": ["chicken-meal", "chicken-liver"],
+  "lamb": ["lamb-meal", "lamb-liver"]
 }]
 
-
-const getInputExclusions = (exclusions) => {
-  exclusions.forEach((exclusion) => {
-    getExclusionSynonyms(exclusion)
+function hasIngredientOrSynonym(ingredient, synonymMap) {
+  return synonymMap.some((synonyms) => {
+    return Object.values(synonyms).flat().includes(ingredient);
   });
-};
-
-const getExclusionSynonyms = (exclusion) => {
-    thesaurus.forEach((item) => {
-        if (item[exclusion]) {
-        item[exclusion].forEach((synonym) => {
-            getExcludedObjects(synonym);
-        });
-        }
-    });
-    getExcludedObjects(exclusion);
 }
 
-const getExcludedObjects = (exclusion) => {
-  data.forEach((item) => {
-    if (item.ingredients.includes(exclusion)) {
-      removeExclusedObjects(item.id);
-    }
+function filterByInclusions(products, desiredIngredients, synonymMap) {
+  const inclusionsSet = new Set(desiredIngredients);
+
+  return products.filter((product) => {
+    return product.ingredients.some((ingredient) => {
+      return inclusionsSet.has(ingredient) || hasIngredientOrSynonym(ingredient, synonymMap);
+    });
   });
-};
+}
 
-const removeExclusedObjects = (id) => {
-  data.forEach((obj) => {
-    if (obj.id !== id) {
-      data.splice(obj.id, 1);
-    }
-  } );
-};
+function filterByExclusions(products, excludedIngredients, synonymMap) {
+  const exclusionsSet = new Set(excludedIngredients);
 
-getInputExclusions(exclusions);
+  return products.filter((product) => {
+    return !product.ingredients.some((ingredient) => {
+      return exclusionsSet.has(ingredient) || hasIngredientOrSynonym(ingredient, synonymMap);
+    });
+  });
+}
 
-console.log(data);
+const includedProducts = filterByInclusions(products, desiredIngredients, synonymMap);
+const filteredProducts = filterByExclusions(includedProducts, excludedIngredients, synonymMap)
+
+console.log(filteredProducts)
